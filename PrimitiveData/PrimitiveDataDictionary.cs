@@ -1,55 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PrimitiveDataDictionary : Dictionary<string, PrimitiveData>
+namespace UnityCSV2SO.PrimitiveData
 {
-    public PrimitiveDataDictionary() : base() { }
-
-    public bool TryGetBool(string key, out bool b)
+    public class PrimitiveDataDictionary : Dictionary<string, PrimitiveData>
     {
-        if (TryGetValue(key, out PrimitiveData pData))
-        {
-            b = pData.Bool;
-            return true;
-        }
-        b = false;
-        return false;
-    }
-    public bool TryGetInt(string key, out int i)
-    {
-        if (TryGetValue(key, out PrimitiveData pData))
-        {
-            i = pData.Int;
-            return true;
-        }
-        i = -1;
-        return false;
-    }
-    public bool TryGetFloat(string key, out float f)
-    {
+        public PrimitiveDataDictionary() : base() { }
 
-        Debug.Log("KEY: " + key + " -- contained? " + ContainsKey(key));
-
-        if (TryGetValue(key, out PrimitiveData pData))
+        public bool TryGetBool(string key, out bool b)
         {
-            f = pData.Float;
-            return true;
+            if (TryGetValue(key, out PrimitiveData pData))
+            {
+                b = pData.Bool;
+                return true;
+            }
+            b = false;
+            return false;
         }
-        f = -1f;
-        return false;
-    }
-    public bool TryGetString(string key, out string s)
-    {
-
-        Debug.Log("KEY: " + key + " -- contained? " + ContainsKey(key));
-
-        if (TryGetValue(key, out PrimitiveData pData))
+        public bool TryGetInt(string key, out int i)
         {
-            s = pData.String;
-            return true;
+            if (TryGetValue(key, out PrimitiveData pData))
+            {
+                i = pData.Int;
+                return true;
+            }
+            i = -1;
+            return false;
         }
-        s = "";
-        return false;
+        public bool TryGetFloat(string key, out float f)
+        {
+
+            Debug.Log("KEY: " + key + " -- contained? " + ContainsKey(key));
+
+            if (TryGetValue(key, out PrimitiveData pData))
+            {
+                f = pData.Float;
+                return true;
+            }
+            f = -1f;
+            return false;
+        }
+        public bool TryGetString(string key, out string s)
+        {
+
+            Debug.Log("KEY: " + key + " -- contained? " + ContainsKey(key));
+
+            if (TryGetValue(key, out PrimitiveData pData))
+            {
+                s = pData.String;
+                return true;
+            }
+            s = "";
+            return false;
+        }
     }
 }

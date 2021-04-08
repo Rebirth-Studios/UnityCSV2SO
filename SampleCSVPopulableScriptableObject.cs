@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityCSV2SO.PrimitiveData;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SampleCSVPopulableScriptableObject", menuName = "CSVData/SampleCSVPopulableScriptableObject")]
 public class SampleCSVPopulableScriptableObject : CSVPopulableScriptableObject
 {
-    public float moveSpeed;
+    public float moveSpeed; 
     public float crouchMoveSpeed;
     public float slideMoveSpeed;
     public float wallrunSpeedStart;
@@ -17,7 +18,17 @@ public class SampleCSVPopulableScriptableObject : CSVPopulableScriptableObject
 #if UNITY_EDITOR
     public override string CSVKey => "Player";
 
-    protected override void PopulateData(PrimitiveDataDictionary dataDictionary)
+    public override void UpdateSelf(ScriptableObject refToUpdate, ScriptableObject newValues)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void SetValue(string value, string key)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected void PopulateData(PrimitiveDataDictionary dataDictionary)
     {
 
         void LogError() => Debug.LogError("Couldn't find value!");

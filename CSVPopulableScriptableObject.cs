@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using UnityCSV2SO.PrimitiveData;
 using UnityEngine;
 /// <summary>
 /// Inherit CSV data scriptable objects from this class.
@@ -15,6 +16,8 @@ public abstract class CSVPopulableScriptableObject : ScriptableObject
     /// Key from which to read data.
     /// </summary>
     public abstract string CSVKey { get; }
+
+    public abstract void UpdateSelf(ScriptableObject refToUpdate, ScriptableObject newValues);
 
     /// <summary>
     /// Editor button that populates CSV data into appropriate fields.
@@ -32,7 +35,7 @@ public abstract class CSVPopulableScriptableObject : ScriptableObject
 
         if (CSVReader.TryGetPrimitiveDictionary(CSVKey, out dictionary))
         {
-            PopulateData(dictionary);
+            // PopulateDataFromOneRow<>(dictionary);
         }
         else
         {
@@ -42,10 +45,22 @@ public abstract class CSVPopulableScriptableObject : ScriptableObject
             return;
         }
     }
-    /// <summary>
-    /// Abstract function that handles the data population per child class.
-    /// </summary>
-    /// <param name="dataDictionary"></param>
-    protected abstract void PopulateData(PrimitiveDataDictionary dataDictionary);
+    
+    
+    public T PopulateDataFromOneRow<T>(string[] valuesAsStrings, string[] keys) where T : ScriptableObject
+    {
+        // MonoBehaviour.print(String.Join(", ", valuesAsStrings));
+        var returnVal = CreateInstance<T>();
+
+        for (int i = 0; i < valuesAsStrings.Length; i++)
+        {
+            if (valuesAsStrings[0] == "" && valuesAsStrings[1] == "") return returnVal;
+            SetValue(valuesAsStrings[i], keys[i]);  
+        }
+        return returnVal;
+    }
+
+    protected abstract void SetValue(string value, string key);
+
 #endif
 }
