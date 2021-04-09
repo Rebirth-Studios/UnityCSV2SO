@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityCSV2SO;
 using UnityCSV2SO.PrimitiveData;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SampleCSVPopulableScriptableObject", menuName = "CSVData/SampleCSVPopulableScriptableObject")]
@@ -23,7 +24,7 @@ public class SampleCSVPopulableScriptableObject : CSVPopulableScriptableObject
         throw new System.NotImplementedException();
     }
 
-    protected override void SetValue(string value, string key)
+    protected override void SetValue<T>(string value, string key, ref T reference)
     {
         throw new System.NotImplementedException();
     }
